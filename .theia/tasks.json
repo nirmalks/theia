@@ -1,0 +1,73 @@
+{
+    // Some sample Theia development tasks
+    "tasks": [
+        {
+            "label": "[Task] short runnning test task (~3s)",
+            "processType": "terminal",
+            "cwd": "$workspace/packages/task/src/node/test-resources/",
+            "processOptions": {
+                "command": "./task",
+                "args": [
+                    "1",
+                    "2",
+                    "3"
+                ]
+            },
+            "windowsProcessOptions": {
+                "command": "cmd.exe",
+                "args": [
+                    "/c",
+                    "task.bat",
+                    "abc"
+                ]
+            }
+        },
+        {
+            "label": "[workspace] long runnning test task (~300s)",
+            "processType": "terminal",
+            "cwd": "$workspace/packages/task/src/node/test-resources/",
+            "processOptions": {
+                "command": "./task-long-running",
+                "args": []
+            },
+            "windowsProcessOptions": {
+                "command": "cmd.exe",
+                "args": [
+                    "/c",
+                    "task-long-running.bat"
+                ]
+            }
+        },
+        {
+            "label": "[workspace] recursively list files from workspace root",
+            "processType": "terminal",
+            "cwd": "$workspace",
+            "processOptions": {
+                "command": "ls",
+                "args": [
+                    "-alR"
+                ]
+            },
+            "windowsProcessOptions": {
+                "command": "cmd.exe",
+                "args": [
+                    "/c",
+                    "dir",
+                    "/s"
+                ]
+            }
+        },
+        {
+            "label": "[workspace] Echo a string",
+            "processType": "terminal",
+            "cwd": "$workspace",
+            "processOptions": {
+                "command": "bash",
+                "args": [
+                    "-c",
+                    "echo 1 2 3"
+                ]
+            }
+        }
+    ]
+}

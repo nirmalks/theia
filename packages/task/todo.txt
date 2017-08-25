@@ -1,0 +1,22 @@
+
+TODO: 
+- rename task -> tasks?
+- fix windows tests hanging
+- do tests on windows (it;s been a while). 
+- put back original JSON parser in task configuration manager - it had better diagnostics (see how Patrick made it work for preferences)
+
+Enhancements
+- add "onStart" tasks, that are executed automatically upon a workspace being "started". e.g. cloning git repos. 
+  - tasks that have finished: should we still permit attaching to them? To see their output could be useful, specially if they are quick, and so already finished by the time the user can try to attach. Could be added in the "onStart" PR, where it will be needed.
+- add support for "global" task configuration using 'user storage'
+- [task config] create new task from quick open, using what user typed in text field. Save in WS tasks.json
+- switch to, or add compatibility for, VS Code task.json format
+- add output parsing to tasks. Let user to specify a parser to use for a task, as part of task launch config.
+  -> option: be compatible with VS Code format
+- issue: task terminal widget restore works well when the task is still running. But if it's no longer, TerminalWidget.start() fails to attach to the task's process, and fallbacks to creating an interactive terminal. In that instance the layout manager calls widget.start(), not the task service, so it can't, e.g. check if a process still exists and if not skip calling start().  
+- notifications about a task being started / terminated: its a bit annoying to have to dismiss them. Would be cool to have auto-dismissed notifications, that dismiss after a delay.
+- add status bar contribution for tasks. e.g. the "show running tasks" status bar button in VS Code. Calls 'attach to running task' task command
+
+
+
+
