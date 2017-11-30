@@ -1,10 +1,17 @@
 import { injectable } from 'inversify';
-import { MessageClient, MessageType, Message, MessageAction } from '@theia/core/lib/common';
-import { FrontendApplication, FrontendApplicationContribution } from '@theia/core/lib/browser';
+import {
+    MessageClient,
+    MessageType,
+    Message,
+    MessageAction
+} from '@theia/core/lib/common';
+import {
+    FrontendApplication,
+    FrontendApplicationContribution
+} from '@theia/core/lib/browser';
 
 import 'izitoast';
-import izitoast1 = require('izitoast');
-require('izitoast/dist/css/iziToast.css');
+import toast = require('izitoast');
 
 export const MESSAGE_CLASS = 'theia-Message';
 export const MESSAGE_ITEM_CLASS = 'theia-MessageItem';
@@ -30,7 +37,7 @@ export class ToastMessageClient extends MessageClient implements FrontendApplica
         const type = this.titleFor(message.type);
         const actions = message.actions || [];
         // tslint:disable-next-line:no-any
-        (izitoast1 as any).show({
+        (toast as any).show({
             title: type,
             message: message.text,
             theme: 'dark',
@@ -44,19 +51,22 @@ export class ToastMessageClient extends MessageClient implements FrontendApplica
         });
     }
 
-    protected createButton(action: MessageAction, onClose: () => void): any {
-        // Using any type due to errors in type definitions,
+    // tslint:disable-next-line:no-any
+    protected createButton(action: MessageAction, onClosing: () => void): [string, (instance: any, t: any) => void] {
+        // Using `any` type due to errors in type definitions,
         // cf. https://github.com/dolce/iziToast/issues/96
-        return [`<button>${action.label}</button>`,
-        function (instance: any, toast: any) {
-            const _instance = instance as any;
-            _instance.hide(toast, {
-                transitionOut: 'fadeOutUp',
-                onClosing: (instance: any, toast: any, closedBy: any) => {
-                    onClose();
-                }
-            }, 'task');
-        }];
+        return [
+            `<button>${action.label}</button>`,
+            // tslint:disable-next-line:no-any
+            function (instance, t) {
+                instance.hide(t, {
+                    transitionOut: 'fadeOutUp',
+                    onClosing
+                },
+                    'task'
+                );
+            }
+        ];
     }
 
     protected titleFor(type: MessageType): string {
@@ -68,5 +78,4 @@ export class ToastMessageClient extends MessageClient implements FrontendApplica
         }
         return 'INFO';
     }
-
 }

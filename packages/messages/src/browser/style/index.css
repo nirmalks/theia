@@ -1,0 +1,24 @@
+.iziToast-wrapper {
+  padding: 0px 15px !important;
+}
+
+.iziToast {
+  margin: 0px !important;
+  border-radius: 0px !important;
+  min-width: 50% !important;
+  padding: 0 45px 0 0 !important;
+  min-height: 38px !important;
+}
+
+.iziToast-buttons {
+  float: right !important;
+}
+
+.iziToast-close {
+  background-size: 10px !important;
+}
+
+.iziToast.iziToast-theme-dark {
+  background: var(--md-blue-grey-700) !important;
+  border-color: var(--md-blue-grey-700) !important;
+}
