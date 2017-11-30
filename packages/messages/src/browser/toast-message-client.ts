@@ -6,9 +6,6 @@ import 'izitoast';
 import izitoast1 = require('izitoast');
 require('izitoast/dist/css/iziToast.css');
 
-// import Noty = require('noty');
-// require('noty/lib/noty.css');
-
 export const MESSAGE_CLASS = 'theia-Message';
 export const MESSAGE_ITEM_CLASS = 'theia-MessageItem';
 
