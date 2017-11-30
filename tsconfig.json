@@ -80,6 +80,9 @@
       ],
       "@theia/outline/lib/*": [
         "packages/outline/src/*"
+      ],
+      "@theia/messages/lib/*": [
+        "packages/messages/src/*"
       ]
     }
   },

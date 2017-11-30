@@ -15,12 +15,12 @@ import {
     KeybindingContextRegistry, KeybindingRegistry,
     KeybindingContext,
     KeybindingContribution,
-    MessageService
+    MessageService,
+    MessageClient,
+    messageServicePath
 } from "../common";
-import { MessageClient, messageServicePath } from '../common/message-service-protocol';
 import { FrontendApplication, FrontendApplicationContribution } from './frontend-application';
 import { DefaultOpenerService, OpenerService, OpenHandler } from './opener-service';
-import { HumaneMessageClient } from './humane-message-client';
 import { WebSocketConnectionProvider } from './messaging';
 import { CommonFrontendContribution } from './common-frontend-contribution';
 import { QuickOpenService, QuickCommandService, QuickCommandFrontendContribution } from './quick-open';
@@ -76,12 +76,10 @@ export const frontendApplicationModule = new ContainerModule((bind, unbind, isBo
     bind(KeybindingContextRegistry).toSelf().inSingletonScope();
     bindContributionProvider(bind, KeybindingContext);
 
-    bind(HumaneMessageClient).toSelf().inSingletonScope();
-    bind(MessageClient).toDynamicValue(ctx => {
-        const messageService = ctx.container.get(HumaneMessageClient);
-        WebSocketConnectionProvider.createProxy(ctx.container, messageServicePath, messageService);
-        return messageService;
-    }).inSingletonScope();
+    bind(MessageClient).toSelf().inSingletonScope().onActivation((context, client) => {
+        WebSocketConnectionProvider.createProxy(context.container, messageServicePath, client);
+        return client;
+    });
     bind(MessageService).toSelf().inSingletonScope();
 
     bind(CommonFrontendContribution).toSelf().inSingletonScope();

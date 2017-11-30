@@ -16,24 +16,43 @@ export enum MessageType {
     Log = 4
 }
 
-export const MessageClient = Symbol('MessageClient');
-export interface MessageClient {
+export interface Message {
+    type: MessageType;
+    king?: string;
+    text: string;
+    actions?: MessageAction[];
+}
+
+export interface MessageAction {
+    label: string;
+    onExecute: () => void;
+}
+
+@injectable()
+export class MessageClient {
+
     /**
      * Show a message of the given type and possible actions to the user.
      * Resolve to a chosen action.
      * Never reject.
+     *
+     * To be implemented by an extension, e.g. by the messages extension.
      */
-    showMessage(type: MessageType, message: string, ...actions: string[]): Promise<string | undefined>;
+    showMessage(message: Message): Promise<MessageAction | undefined> {
+        // tslint:disable-next-line:no-console
+        console.log(message.text);
+        return Promise.resolve(undefined);
+    }
 }
 
 @injectable()
-export class DispatchingMessageClient implements MessageClient {
+export class DispatchingMessageClient extends MessageClient {
 
     readonly clients = new Set<MessageClient>();
 
-    showMessage(type: MessageType, message: string, ...actions: string[]): Promise<string | undefined> {
-        return Promise.race([...this.clients].map(service =>
-            service.showMessage(type, message, ...actions)
+    showMessage(message: Message): Promise<MessageAction | undefined> {
+        return Promise.race([...this.clients].map(client =>
+            client.showMessage(message)
         ));
     }
 
