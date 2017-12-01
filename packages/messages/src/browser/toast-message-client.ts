@@ -29,11 +29,11 @@ export class ToastMessageClient extends MessageClient {
     }
 
     protected showToast(message: Message, onCloseFn: (action: string | undefined) => void): void {
-        const type = this.titleFor(message.type);
+        const icon = this.iconFor(message.type);
         const actions = message.actions || [];
         // tslint:disable-next-line:no-any
         (toast as any).show({
-            title: type,
+            icon,
             message: message.text,
             theme: 'dark',
             position: 'topCenter',
@@ -64,13 +64,13 @@ export class ToastMessageClient extends MessageClient {
         ];
     }
 
-    protected titleFor(type: MessageType): string {
+    protected iconFor(type: MessageType): string {
         if (type === MessageType.Error) {
-            return 'ERROR';
+            return 'fa fa-times-circle';
         }
         if (type === MessageType.Warning) {
-            return 'WARNING';
+            return 'fa fa-warning';
         }
-        return 'INFO';
+        return 'fa fa-info-circle';
     }
 }
