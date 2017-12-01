@@ -12,6 +12,15 @@ export default new ContainerModule((bind, unbind, isBound, rebind) => {
     rebind(MessageClient).toDynamicValue(context => {
         const client = context.container.get(ToastMessageClient);
         WebSocketConnectionProvider.createProxy(context.container, messageServicePath, client);
+        makeGlobal(client);
         return client;
     }).inSingletonScope();
 });
+
+function makeGlobal(client: any): void {
+    // tslint:disable-next-line:no-any
+    const wnd = window as any;
+    if (!wnd.__messageClient) {
+        wnd.__messageClient = client;
+    }
+}
