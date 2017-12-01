@@ -1,0 +1,58 @@
+/*
+* Copyright (C) 2017 TypeFox and others.
+*
+* Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
+
+.theia-messages-container {
+    font-size: var(--theia-ui-font-size1);
+    color: var(--theia-ui-font-color0);
+}
+
+.theia-messages-container .theia-TreeNode {
+    width: 100%;
+}
+
+.theia-messages-container .theia-ExpansionToggle {
+    min-width: 16px;
+}
+
+.theia-messages-container .nomessages {
+    margin: 5px;
+}
+
+.theia-messages-container .messageNode {
+    display: flex;
+}
+
+.theia-messages-container .messageNode {
+    width: calc(100% - 32px);
+}
+
+.theia-messages-container .messageNode div {
+    margin-right: 5px;
+}
+
+.theia-messages-container .error {
+    color: var(--theia-error-color0);
+}
+
+.theia-messages-container .warning {
+    color: var(--theia-warn-color0);
+}
+
+.theia-messages-container .information {
+    color: var(--theia-info-color0);
+}
+
+.theia-messages-container .messageNode .position {
+    color: var(--theia-ui-font-color2);
+    margin-left: 5px;
+}
+
+.theia-messages-container .messageNode .message {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

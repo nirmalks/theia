@@ -1,54 +1,9 @@
-.iziToast-wrapper {
-    padding: 0px 15px !important;
-}
+/*
+* Copyright (C) 2017 TypeFox and others.
+*
+* Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
 
-.iziToast {
-    margin: 0px !important;
-    border-radius: 0px !important;
-    min-width: 50% !important;
-    padding: 0 45px 0 0 !important;
-    min-height: 38px !important;
-}
-
-.iziToast::after {
-    box-shadow: 0 5px 5px -5px rgba(0,0,0,0.6) !important;
-}
-
-.iziToast-body {
-    height: 100% !important;
-}
-
-.iziToast-buttons {
-    float: right !important;
-    margin: 0px !important;
-    height: 100% !important;
-    min-height: 38px !important;
-    background: rgba(255,255,255,0.1) !important;
-}
-
-.iziToast-buttons > button {
-    margin: 10px 0 0 0 !important;
-    padding: 0 10px 0 10px !important;
-    background: none !important;
-}
-
-.iziToast > .iziToast-body .iziToast-buttons > button:focus,
-.iziToast.iziToast-theme-dark .iziToast-buttons > button:focus {
-    box-shadow: none !important;
-    outline: none !important;
-    color: rgba(0,0,0,0.8);
-}
-
-.iziToast-close {
-    background-size: 10px !important;
-}
-
-.iziToast.iziToast-theme-dark {
-    background: var(--md-blue-grey-700) !important;
-    border-color: var(--md-blue-grey-700) !important;
-}
-
-.iziToast.fadeInDown {
-    -webkit-animation: iziT-fadeInDown 0.3s ease both !important;
-    animation: iziT-fadeInDown 0.3s ease both !important;
-}
+@import './toast.css';
+@import './view.css';
