@@ -8,6 +8,20 @@ To run tests on theia run:
 
 This will run all CI enabled tests.
 
+If you want to run all tests for a particular Theia extension, execute the following command from the root:
+
+`npx run test @theia/extension-name`
+
+If you would like to enable watch mode for the tests, add the following npm script to the `package.json` of the desired Theia extension.
+
+```json
+  "test:watch": "theiaext test:watch"
+```
+
+After editing the `package.json`, execute `yarn` in the Theia root, then you can run the tests in watch mode with:
+
+`npx run test:watch @theia/extension-name`
+
 ## Test directory structure
 
 The test directory structure is as follows:
