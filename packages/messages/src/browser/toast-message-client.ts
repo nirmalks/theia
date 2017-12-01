@@ -2,8 +2,7 @@ import { injectable } from 'inversify';
 import {
     MessageClient,
     MessageType,
-    Message,
-    MessageAction
+    Message
 } from '@theia/core/lib/common';
 import {
     FrontendApplication,
@@ -23,17 +22,17 @@ export class ToastMessageClient extends MessageClient implements FrontendApplica
         // no-op
     }
 
-    showMessage(message: Message): Promise<MessageAction | undefined> {
+    showMessage(message: Message): Promise<string | undefined> {
         return this.show(message);
     }
 
-    protected show(message: Message): Promise<MessageAction | undefined> {
+    protected show(message: Message): Promise<string | undefined> {
         return new Promise(resolve => {
             this.showToast(message, a => resolve(a));
         });
     }
 
-    protected showToast(message: Message, onCloseFn: (action: MessageAction | undefined) => void): void {
+    protected showToast(message: Message, onCloseFn: (action: string | undefined) => void): void {
         const type = this.titleFor(message.type);
         const actions = message.actions || [];
         // tslint:disable-next-line:no-any
@@ -52,11 +51,11 @@ export class ToastMessageClient extends MessageClient implements FrontendApplica
     }
 
     // tslint:disable-next-line:no-any
-    protected createButton(action: MessageAction, onClosing: () => void): [string, (instance: any, t: any) => void] {
+    protected createButton(action: string, onClosing: () => void): [string, (instance: any, t: any) => void] {
         // Using `any` type due to errors in type definitions,
         // cf. https://github.com/dolce/iziToast/issues/96
         return [
-            `<button>${action.label}</button>`,
+            `<button>${action}</button>`,
             // tslint:disable-next-line:no-any
             function (instance, t) {
                 instance.hide(t, {

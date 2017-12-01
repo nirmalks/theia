@@ -20,12 +20,7 @@ export interface Message {
     type: MessageType;
     king?: string;
     text: string;
-    actions?: MessageAction[];
-}
-
-export interface MessageAction {
-    label: string;
-    onExecute: () => void;
+    actions?: string[];
 }
 
 @injectable()
@@ -38,7 +33,7 @@ export class MessageClient {
      *
      * To be implemented by an extension, e.g. by the messages extension.
      */
-    showMessage(message: Message): Promise<MessageAction | undefined> {
+    showMessage(message: Message): Promise<string | undefined> {
         // tslint:disable-next-line:no-console
         console.log(message.text);
         return Promise.resolve(undefined);
@@ -50,7 +45,7 @@ export class DispatchingMessageClient extends MessageClient {
 
     readonly clients = new Set<MessageClient>();
 
-    showMessage(message: Message): Promise<MessageAction | undefined> {
+    showMessage(message: Message): Promise<string | undefined> {
         return Promise.race([...this.clients].map(client =>
             client.showMessage(message)
         ));
